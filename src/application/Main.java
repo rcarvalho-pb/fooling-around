@@ -5,17 +5,26 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
-        try(BufferedReader buffRead = new BufferedReader(new FileReader("src/input/in.csv"))){
-            int []mat = {1, 2, 3, 4, 1, 2, 4, 1, 2, 6, 7, 8, 10, 9, 1, 2, 10};
+        try(BufferedReader br = new BufferedReader(new FileReader("src/input/in.csv"))){
+
+            List<Integer> mat = new ArrayList<>();
+
+            for(String line = br.readLine(); line != null; line = br.readLine()){
+                String []k = line.split(",");
+                for(int i = 0; i < k.length; i++){
+                    mat.add(Integer.parseInt(k[i]));
+                }
+            }
+
             List<List<Integer>> number = new ArrayList<>();
             int quantity = 1;
             int num = 0;
             
-            for (int i = 0; i < mat.length; i++){
-                for (int j = i; j < mat.length - 1; j++){
-                    if(mat[i] == mat[j + 1]){
+            for (int i = 0; i < mat.size(); i++){
+                for (int j = i; j < mat.size() - 1; j++){
+                    if(mat.get(i) == mat.get(j + 1)){
                         quantity++;
-                        num = mat[i];
+                        num = mat.get(i);
                     }
                 }
 
@@ -39,14 +48,14 @@ public class Main{
             }
         }
         catch (FileNotFoundException ex){
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
         catch (IOException ex){
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
 
         }
         catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 }
